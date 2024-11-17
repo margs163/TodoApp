@@ -37,7 +37,7 @@ export default function TodoRow({
         <div>
           <h3
             className={`text-gray-600 leading-snug font-semibold text-lg ${
-              isCompleted && "line-through decoration-2 text-gray-400"
+              isCompleted && "line-through decoration-2 text-gray-400/95"
             }`}
           >
             {title}
