@@ -74,7 +74,7 @@ export default function TodoCEForm({
               required
             />
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className="flex gap-4 mt-2">
             <button
               className="px-7 py-2 hover:bg-indigo-600 bg-indigo-500 text-white text-lg font-semibold rounded-md"
               type="submit"
