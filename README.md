@@ -1,6 +1,5 @@
 # TodoApp with Vite + React, Tailwind CSS
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![image](https://github.com/user-attachments/assets/5b1bca3a-7d2d-433e-a83c-b106fe80fcca)
 
 Currently, two official plugins are available:
 
