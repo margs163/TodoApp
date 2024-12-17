@@ -1,15 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchAddBar from "./SearchAddBar";
 import TodoContain from "./TodoContainer";
 
 export default function AppMain() {
   function parseDate(date) {
-    return `${date.getHours()}:0${date.getMinutes()}, ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    return `${date.getHours()}:${
+      +date.getMinutes() < 10 ? "0" : ""
+    }${date.getMinutes()}, ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
   }
 
-  const todoList = JSON.parse(localStorage.getItem("history"));
+  const makeUp = [
+    {
+      id: 1231,
+      title: "Do the math Homework📒",
+      date: parseDate(new Date()),
+      isCompleted: false,
+      value: 1,
+    },
+    {
+      id: 4312123,
+      title: "Go to the Gym🏃‍♂️",
+      date: parseDate(new Date()),
+      isCompleted: false,
+      value: 3,
+    },
+    {
+      id: 9128,
+      title: "Clean Up the House🏠",
+      date: parseDate(new Date()),
+      isCompleted: false,
+      value: 2,
+    },
+    {
+      id: 9128,
+      title: "Play videogames🎮",
+      date: parseDate(new Date()),
+      isCompleted: false,
+      value: 1,
+    },
+  ];
 
-  const [stateTodoList, setStateTodoList] = useState(todoList);
+  const defaultTodo = () => {
+    const storageList = localStorage.getItem("history");
+    const todosList = JSON.parse(storageList) ?? makeUp;
+    return todosList;
+  };
+
+  const [stateTodoList, setStateTodoList] = useState(defaultTodo());
   const [sortType, setSortType] = useState(1);
   const [searchList, setSearchList] = useState(stateTodoList);
   const [editClicked, setEditClicked] = useState(false);
@@ -19,7 +56,9 @@ export default function AppMain() {
   const [taskDate, setTaskDate] = useState(new Date());
   const [taskValue, setTaskValue] = useState(1);
 
-  localStorage.setItem("history", JSON.stringify(stateTodoList));
+  useEffect(() => {
+    localStorage.setItem("history", JSON.stringify(stateTodoList));
+  }, [stateTodoList]);
 
   function handleCompletion(id, isCompleted) {
     const nextTodoList = stateTodoList.slice();
@@ -53,7 +92,7 @@ export default function AppMain() {
     } else {
       const listCopy = stateTodoList.slice();
       const editedList = listCopy.map((task) => {
-        if (task.id === editId) {      
+        if (task.id === editId) {
           const nextTask = {
             id: task.id,
             title: taskTitle,
